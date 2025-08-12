@@ -31,12 +31,12 @@ def run_query(query, variables=None, retries=3):
 def get_top_repo_ids(total_repos=100):
     repos = []
     cursor = None
-    per_page = 50
+    per_page = 100
 
     while len(repos) < total_repos:
         query = """
         query($cursor: String, $perPage: Int!) {
-          search(query: "stars:>1 sort:stars-desc is:public open-source", type: REPOSITORY, first: $perPage, after: $cursor) {
+          search(query: "stars:>1 sort:stars-desc is:public", type: REPOSITORY, first: $perPage, after: $cursor) {
             pageInfo { endCursor hasNextPage }
             edges {
               node {
@@ -108,5 +108,4 @@ def collect_and_print_repo_data():
 if __name__ == "__main__":
     start_time = time.time()
     collect_and_print_repo_data()
-    print(f"Total de repositórios analisados: {len(get_top_repo_ids(100))}")
     print(f"Tempo total de execução: {time.time() - start_time:.2f} segundos")
