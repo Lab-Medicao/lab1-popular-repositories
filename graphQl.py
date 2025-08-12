@@ -28,7 +28,7 @@ def run_query(query, variables=None, retries=3):
 
     raise Exception(f"Query failed after {retries} attempts")
 
-def get_top_repo_ids(total_repos=1000):
+def get_top_repo_ids(total_repos=100):
     repos = []
     cursor = None
     per_page = 50
@@ -108,5 +108,5 @@ def collect_and_print_repo_data():
 if __name__ == "__main__":
     start_time = time.time()
     collect_and_print_repo_data()
-    print(f"Total de repositórios analisados: {len(get_top_repo_ids(1000))}")
+    print(f"Total de repositórios analisados: {len(get_top_repo_ids(100))}")
     print(f"Tempo total de execução: {time.time() - start_time:.2f} segundos")
