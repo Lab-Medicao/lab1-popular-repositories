@@ -28,7 +28,7 @@ def run_query(query, variables=None, retries=3):
 
     raise Exception(f"Query failed after {retries} attempts")
 
-def get_top_repo_ids(total_repos=100):
+def get_top_repo_ids(total_repos=1000):
     repos = []
     cursor = None
     per_page = 50
@@ -36,7 +36,7 @@ def get_top_repo_ids(total_repos=100):
     while len(repos) < total_repos:
         query = """
         query($cursor: String, $perPage: Int!) {
-          search(query: "stars:>1 sort:stars-desc", type: REPOSITORY, first: $perPage, after: $cursor) {
+          search(query: "stars:>1 sort:stars-desc is:public open-source", type: REPOSITORY, first: $perPage, after: $cursor) {
             pageInfo { endCursor hasNextPage }
             edges {
               node {
@@ -106,4 +106,7 @@ def collect_and_print_repo_data():
         print("-" * 40)
 
 if __name__ == "__main__":
+    start_time = time.time()
     collect_and_print_repo_data()
+    print(f"Total de repositórios analisados: {len(get_top_repo_ids(1000))}")
+    print(f"Tempo total de execução: {time.time() - start_time:.2f} segundos")
