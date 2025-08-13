@@ -1,7 +1,23 @@
 import requests
 import time
+import keyring
+import os
 
-TOKEN = "TOKEN"
+service_name = "GITHUB_API_TOKEN"
+username = "LAB_EXPERIMENTACAO"
+
+# Tenta obter o token do gerenciador de senhas do sistema (Keychain, Windows Credential Manager, etc.)
+TOKEN = keyring.get_password(service_name, username)
+
+# Se o token não for encontrado no gerenciador de senhas, tenta ler de uma variável de ambiente
+if not TOKEN:
+    print("Token não encontrado no keyring. Tentando ler da variável de ambiente 'GITHUB_API_TOKEN'...")
+    TOKEN = os.getenv("GITHUB_API_TOKEN")
+
+# Se o token ainda não for encontrado, o código deve levantar um erro
+if not TOKEN:
+    raise ValueError("Token de autenticação não encontrado. Por favor, defina-o no keyring ou na variável de ambiente 'GITHUB_API_TOKEN'.")
+
 HEADERS = {
     "Authorization": f"Bearer {TOKEN}",
     "Content-Type": "application/json"
