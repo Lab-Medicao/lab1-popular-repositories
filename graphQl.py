@@ -2,27 +2,29 @@ import requests
 import time
 import keyring
 import os
+import csv
+from tqdm import tqdm
 
 service_name = "GITHUB_API_TOKEN"
 username = "LAB_EXPERIMENTACAO"
 
-# Tenta obter o token do gerenciador de senhas do sistema (Keychain, Windows Credential Manager, etc.)
+# Tenta obter o token do keyring
 TOKEN = keyring.get_password(service_name, username)
 
-# Se o token não for encontrado no gerenciador de senhas, tenta ler de uma variável de ambiente
+# Se não achar no keyring, tenta na variável de ambiente
 if not TOKEN:
     print("Token não encontrado no keyring. Tentando ler da variável de ambiente 'GITHUB_API_TOKEN'...")
     TOKEN = os.getenv("GITHUB_API_TOKEN")
 
-# Se o token ainda não for encontrado, o código deve levantar um erro
 if not TOKEN:
-    raise ValueError("Token de autenticação não encontrado. Por favor, defina-o no keyring ou na variável de ambiente 'GITHUB_API_TOKEN'.")
+    raise ValueError("Tokenpython3 -m venv venv de autenticação não encontrado. Configure no keyring ou na variável de ambiente 'GITHUB_API_TOKEN'.")
 
 HEADERS = {
     "Authorization": f"Bearer {TOKEN}",
     "Content-Type": "application/json"
 }
 URL = "https://api.github.com/graphql"
+
 
 def run_query(query, variables=None, retries=3):
     payload = {"query": query}
@@ -44,10 +46,11 @@ def run_query(query, variables=None, retries=3):
 
     raise Exception(f"Query failed after {retries} attempts")
 
-def get_top_repo_ids(total_repos=100):
+
+def get_top_repo_ids(total_repos=1000):
     repos = []
     cursor = None
-    per_page = 100
+    per_page = 100  # GitHub GraphQL aceita até 100 por página
 
     while len(repos) < total_repos:
         query = """
@@ -80,6 +83,7 @@ def get_top_repo_ids(total_repos=100):
 
     return repos[:total_repos]
 
+
 def get_repo_details(owner, name):
     query = """
     query($owner: String!, $name: String!) {
@@ -99,29 +103,45 @@ def get_repo_details(owner, name):
     result = run_query(query, variables)
     return result["data"]["repository"]
 
-def collect_and_print_repo_data():
-    repos = get_top_repo_ids(100)
-    for repo in repos:
-        details = get_repo_details(repo["owner"]["login"], repo["name"])
-        primary_language = details['primaryLanguage']['name'] if details['primaryLanguage'] else 'Unknown'
-        open_issues = details['issues']['totalCount']
-        closed_issues = details['closedIssues']['totalCount']
-        total_issues = open_issues + closed_issues
-        closed_ratio = (closed_issues / total_issues) if total_issues > 0 else 0
 
-        print(f"Repository: {repo['owner']['login']}/{repo['name']}")
-        print(f"Stars: {details['stargazerCount']}")
-        print(f"Repository Age: {details['createdAt']}")
-        print(f"Last Updated: {details['updatedAt']}")
-        print(f"Primary Language: {primary_language}")
-        print(f"Releases: {details['releases']['totalCount']}")
-        print(f"Open Issues: {open_issues}")
-        print(f"Closed Issues: {closed_issues}")
-        print(f"Closed Issues Ratio: {closed_ratio:.2f}")
-        print(f"Merged Pull Requests: {details['pullRequests']['totalCount']}")
-        print("-" * 40)
+def collect_and_save_repo_data(filename="repos_data.csv"):
+    repos = get_top_repo_ids(1000)
+
+    with open(filename, mode="w", newline="", encoding="utf-8") as file:
+        writer = csv.writer(file)
+        writer.writerow([
+            "Owner", "Repository", "Stars", "Created At", "Last Updated",
+            "Primary Language", "Releases", "Open Issues", "Closed Issues",
+            "Closed Issues Ratio", "Merged Pull Requests"
+        ])
+
+        # Adicionando barra de progresso
+        for repo in tqdm(repos, desc="Processando repositórios", unit="repo"):
+            details = get_repo_details(repo["owner"]["login"], repo["name"])
+            primary_language = details['primaryLanguage']['name'] if details['primaryLanguage'] else 'Unknown'
+            open_issues = details['issues']['totalCount']
+            closed_issues = details['closedIssues']['totalCount']
+            total_issues = open_issues + closed_issues
+            closed_ratio = (closed_issues / total_issues) if total_issues > 0 else 0
+
+            writer.writerow([
+                repo['owner']['login'],
+                repo['name'],
+                details['stargazerCount'],
+                details['createdAt'],
+                details['updatedAt'],
+                primary_language,
+                details['releases']['totalCount'],
+                open_issues,
+                closed_issues,
+                f"{closed_ratio:.2f}",
+                details['pullRequests']['totalCount']
+            ])
+
+    print(f"\n✅ Dados salvos em {filename}")
+
 
 if __name__ == "__main__":
     start_time = time.time()
-    collect_and_print_repo_data()
-    print(f"Tempo total de execução: {time.time() - start_time:.2f} segundos")
+    collect_and_save_repo_data("repos_data.csv")
+    print(f"⏱️ Tempo total de execução: {time.time() - start_time:.2f} segundos")
