@@ -1,4 +1,4 @@
-# Coleta de Dados dos 100 Repositórios Mais Populares no GitHub via GraphQL
+# Relatório Preliminar - Características de Repositórios Populares
 
 Este projeto realiza a coleta automática de dados e métricas dos 100 repositórios públicos mais populares no GitHub, utilizando a **API GraphQL** do GitHub.  
 São obtidas informações como número de estrelas, linguagem principal, releases, issues abertas e fechadas, pull requests mesclados, data de criação e última atualização.
@@ -9,6 +9,30 @@ São obtidas informações como número de estrelas, linguagem principal, releas
 - Utilização da API GraphQL para coletar informações detalhadas.
 - Requisições automáticas com tolerância a erros temporários (retries para status 502, 503 e 504).
 - Cálculo da razão de issues fechadas em relação ao total de issues.
+
+## Hipóteses Informais para as Questões de Pesquisa
+
+A seguir, são apresentadas as **questões de pesquisa (RQs)** e as respectivas **hipóteses informais** que orientarão a análise dos dados:
+
+- **RQ 01. Sistemas populares são maduros/antigos?**  
+  - **Hipótese Informal:** Espera-se que **sistemas populares sejam maduros/antigos**, pois a longevidade geralmente contribui para a sua popularidade e estabilidade. Um projeto com mais tempo de existência tende a ter mais funcionalidades, uma base de usuários estabelecida e maior confiança na comunidade.
+
+- **RQ 02. Sistemas populares recebem muita contribuição externa?**  
+  - **Hipótese Informal:** Espera-se que **sistemas populares recebam um alto volume de contribuições externas** (medido pelo total de *pull requests* aceitas), indicando uma comunidade ativa e engajada que impulsiona o desenvolvimento e a melhoria contínua do projeto.
+
+- **RQ 03. Sistemas populares lançam *releases* com frequência?**  
+  - **Hipótese Informal:** Espera-se que **sistemas populares lancem *releases* com frequência**, demonstrando um desenvolvimento contínuo e a entrega regular de novas funcionalidades, correções de bugs ou melhorias aos usuários. Isso sinaliza um projeto ativo e bem mantido.
+
+- **RQ 04. Sistemas populares são atualizados com frequência?**  
+  - **Hipótese Informal:** Espera-se que **sistemas populares sejam atualizados com muita frequência**, o que é crucial para manter a relevância, segurança, compatibilidade com novas tecnologias e para atender às demandas dos usuários e do ecossistema.
+
+- **RQ 05. Sistemas populares são escritos nas linguagens mais populares?**  
+  - **Hipótese Informal:** Espera-se que **sistemas populares sejam majoritariamente escritos nas linguagens de programação mais populares**, o que facilita a contribuição de uma base maior de desenvolvedores e a adoção por um público mais amplo, dado que essas linguagens possuem mais ferramentas, documentação e suporte.
+
+- **RQ 06. Sistemas populares possuem um alto percentual de *issues* fechadas?**  
+  - **Hipótese Informal:** Espera-se que **sistemas populares possuam um alto percentual de *issues* fechadas**, refletindo a eficiência da equipe de desenvolvimento em resolver problemas, responder às necessidades dos usuários e manter a qualidade do projeto. Um bom gerenciamento de *issues* é um indicativo de maturidade do projeto.
+
+---
 
 ## Requisitos do projeto
 
