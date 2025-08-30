@@ -85,11 +85,40 @@ https://api.github.com/search/repositories?q={keyword}&sort=stars&order=desc&per
 
 ## Análise
 
-## Resultados
+## Resultados Encontrados
 
-### Tempo médio de execução
+### Tempo Médio de Execução
+Devido à paginação dos resultados retornados pela API do GitHub, o script tem um tempo médio de execução de aproximadamente **12 minutos**.  
+Esse tempo pode variar conforme o número de repositórios processados e o limite de resultados por página.
 
-Devido à paginação dos resultados retornados pela API do GitHub, o script tem um **tempo médio de execução de aproximadamente 30 minutos**. Esse tempo pode variar conforme o número de repositórios processados e o limite de resultados por página.
+---
+
+### Estrutura do Arquivo CSV
+O arquivo **repos_data.csv** gerado pelo script contém as seguintes colunas:
+
+- **name**: Nome do repositório.  
+- **stars**: Número de estrelas recebidas.  
+- **language**: Linguagem de programação principal utilizada.  
+- **releases**: Número de releases publicadas.  
+- **open_issues**: Número de issues abertas.  
+- **closed_issues**: Número de issues fechadas.  
+- **merged_prs**: Número de pull requests mesclados.  
+- **created_at**: Data de criação do repositório.  
+- **updated_at**: Data da última atualização do repositório.  
+
+---
+
+### Exemplo de Dados
+
+| name            | stars | language     | releases | open_issues | closed_issues | merged_prs | created_at          | updated_at          |
+|-----------------|-------|--------------|----------|-------------|---------------|------------|---------------------|---------------------|
+| example-repo-1   | 1500  | Python       | 10       | 5           | 50            | 20         | 2020-01-01T12:00:00 | 2025-08-29T12:00:00 |
+| example-repo-2   | 1200  | JavaScript   | 8        | 3           | 30            | 15         | 2019-05-15T12:00:00 | 2025-08-28T12:00:00 |
+
+---
+
+Esses dados podem ser utilizados para **análise estatística**, **visualização de tendências** e **comparação** entre repositórios populares no GitHub.
+
 
 ## Conclusão
 Este experimento demonstrou a viabilidade de coletar e analisar dados de repositórios populares no GitHub que implementam microsserviços. A metodologia utilizada permitiu identificar e ranquear os principais repositórios com base em critérios objetivos como estrelas e forks, apesar da limitação de apenas considerar repositórios que explicitamente mencionam "microservices" em seus metadados. O algoritmo de ranqueamento leva em média 30 minutos para rodar devido à necessidade de lidar com a paginação da API do GitHub, enquanto o algoritmo de cálculos estatísticos é instantâneo, pois os repositórios são fixos no código.
