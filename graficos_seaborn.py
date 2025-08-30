@@ -88,35 +88,20 @@ def grafico_percentual_issues_fechadas(df):
 # com os resultados de sistemas em outras linguagens.
 # Métricas: Total de pull requests aceitas, total de releases, tempo até a última atualização
 # Gráfico: Heatmap
-def grafico_heatmap_linguagens_populares(df):
-    # Lista das linguagens populares da reportagem
+def grafico_extra_linguagens_populares(df):
     linguagens_populares = [
         "Python", "JavaScript", "TypeScript", "Java", "C#", "C++", "PHP", "Shell", "C", "Go"
     ]
-
-    df['Last Updated'] = pd.to_datetime(df['Last Updated'], utc=True)
-    now = datetime.now(timezone.utc)
-    df['Dias desde última atualização'] = (now - df['Last Updated']).dt.days
-
-    # Cria uma nova coluna para agrupar
     df['Grupo Linguagem'] = df['Primary Language'].apply(
         lambda x: 'Popular' if x in linguagens_populares else 'Outras'
     )
-
-    # Agrupa por grupo e calcula as médias das métricas relevantes
-    resumo = df.groupby('Grupo Linguagem').agg({
-        'Merged Pull Requests': 'mean',
-        'Releases': 'mean',
-        'Dias desde última atualização': 'mean'
-    })
-
-    plt.figure(figsize=(7,5))
-    sns.heatmap(resumo, annot=True, cmap='YlGnBu')
-    plt.title('Médias das métricas: Linguagens populares vs Outras')
-    salvar_grafico('heatmap_linguagens_populares_vs_outras')
+    plt.figure(figsize=(10,6))
+    sns.boxplot(x='Grupo Linguagem', y='Merged Pull Requests', data=df)
+    plt.title('Pull Requests Aceitas: Linguagens populares vs Outras')
+    salvar_grafico('extra_linguagens_populares')
 
 # Gráfico adicional: Heatmap de correlações entre métricas
-def grafico_heatmap_correlacoes(df):
+def grafico_extra_heatmap_correlacoes(df):
     df['Created At'] = pd.to_datetime(df['Created At'], utc=True)
     now = datetime.now(timezone.utc)
     df['Idade (anos)'] = (now - df['Created At']).dt.days / 365
@@ -132,7 +117,7 @@ def grafico_heatmap_correlacoes(df):
     plt.figure(figsize=(10,8))
     sns.heatmap(corr, annot=True, cmap='coolwarm')
     plt.title('Heatmap de Correlação entre Métricas dos Repositórios')
-    salvar_grafico('heatmap_correlacoes')
+    salvar_grafico('extra_correlacoes')
 
 def main():
     df = pd.read_csv('repos_data.csv')
@@ -143,8 +128,8 @@ def main():
     grafico_tempo_ultima_atualizacao(df)
     grafico_linguagem_primaria(df)
     grafico_percentual_issues_fechadas(df)
-    grafico_heatmap_linguagens_populares(df)
-    grafico_heatmap_correlacoes(df) 
+    grafico_extra_linguagens_populares(df)
+    grafico_extra_heatmap_correlacoes(df) 
 
 if __name__ == '__main__':
     main()
