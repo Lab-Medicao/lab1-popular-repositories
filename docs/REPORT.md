@@ -30,36 +30,53 @@ Foi utilizada a GitHub API para coletar os dados necessários dos repositórios.
 
 ## Metodologia
 
-A coleta automática foi feita através da API GraphQL do GitHub, realizando consultas sob medida e evitando overfetching/underfetching de informações, além de reduzir o número de requisições, oferecer paginação mais eficiente e reduzir a carga na API e no script.
+### 1. Escopo
 
-A metodologia adotada para este projeto é composta pelas seguintes etapas:
+- Coletar dados dos 1000 repositórios públicos mais populares, ordenados pelo número de estrelas.
+- O critério de popularidade foi definido pela contagem de estrelas (stargazerCount).
 
-1. Definição do Escopo
+### 2. Coleta de dados: 
 
-   - Coletar dados dos 1000 repositórios mais populares do GitHub, ordenados pelo número de estrelas.
+A coleta de dados foi realizada utilizando a API do GitHub para obter informações detalhadas dos 1000 repositórios públicos mais populares, ordenados pelo número de estrelas. Como critério do experimento, foram considerados apenas os repositórios públicos com pelo menos uma estrela. Repositórios privados ou com menos relevância em termos de popularidade não foram incluídos na análise.
 
-2. Implementação da Coleta
+### 3. Implementação da Coleta
 
-   - Utilização da API GraphQL do GitHub, que permite consultas otimizadas e personalizadas.
-   - Desenvolvimento de funções para lidar com paginação (100 por página).
-   - Requisições automáticas com tolerância a erros temporários (retries para status 502, 503 e 504).
-   - Cálculo da razão de issues fechadas em relação ao total de issues.
+- Linguagem de consulta: Foi utilizado o GraphQL para consultas sob medida, evitando overfetching ou underfetching de informações. Essa abordagem também reduz o número de requisições, oferece paginação mais eficiente e diminui a carga tanto na API quanto no script de coleta.
+- Paginação: Foram utilizadas funções para lidar com paginação, permitindo obter resultados em lotes de 100 repositórios por requisição e garantindo maior estabilidade da coleta devido ao grande número de repositórios consultados, mantendo maior controle do progresso e respeitando os limites de requisição da API.
+- Cálculo de Issues: Foi utilizado um método para calcular a razão de issues fechadas em relação ao total de issues do repositório, obtida dividindo-se o número de issues fechadas pelo número total de issues (abertas + fechadas). Essa métrica fornece uma indicação da eficiência de resolução de problemas e do nível de manutenção do projeto, permitindo comparar a capacidade de gerenciamento de issues entre repositórios populares.
+- Ordenação dos resultados: A query de busca retorna os repositórios em ordem decrescente de estrelas, salvando no CSV sem aplicar nenhuma ordenação adicional, sendo essa determinada pela própria API do GitHub.
+- Tolerância a falhas: Foi implementado um mecanismo básico de tolerância a falhas, onde são disparadas requisições automáticas com tolerância a erros temporários (mas limitado a erros temporários da API), incluindo retries para os status 502, 503 e 504.
 
 3. Métricas Coletadas
-   Para cada repositório, o sistema obtém: \* Número de estrelas (stargazerCount):
 
-   - Dono/proprietário do repositório
-   - Data de criação e última atualização
-   - Linguagem primária do projeto
-   - Número de releases
-   - Issues abertas e fechadas
-   - Razão de issues fechadas sobre o total
-   - Pull requests mesclados
+Para cada repositório, foram obtidas as seguintes métricas:
 
-4. Execução e Validação
+- Número de estrelas (stargazerCount)
+- Dono/proprietário do repositório
+- Data de criação e última atualização
+- Linguagem primária do projeto
+- Número de releases
+- Número de issues abertas e fechadas
+- Razão de issues fechadas sobre o total
+- Número de pull requests mesclados
 
-   - O script é executado em Python e imprime os resultados em um arquivo CSV.
-   - O tempo de execução total também é registrado para avaliar a eficiência do processo.
+4. Análise Gráfica
+
+Para explorar os dados coletados e responder às questões de pesquisa (RQs), foram criados gráficos utilizando Python com a biblioteca Seaborn, incluindo:
+
+- Violin Plot: Distribuição da idade dos repositórios e percentual de issues fechadas.
+- Histograma (histplot): Distribuição de tempo desde a última atualização dos repositórios.
+- Scatter Plot: Relação entre estrelas e número de releases, e entre estrelas e pull requests aceitas.
+- Swarmplot: Distribuição das linguagens primárias dos repositórios populares.
+- Heatmap: Correlação entre todas as métricas coletadas para identificar padrões e relações.
+
+Cada gráfico foi salvo em arquivo PNG para posterior análise e interpretação dos resultados.
+
+5. Execução e Validação
+
+- O script foi implementado em Python e os dados coletados foram salvos em um arquivo CSV (repos_data.csv) para posterior análise.
+- O tempo total de execução foi registrado para avaliação de desempenho do processo de coleta e análise.
+- Todos os dados e gráficos foram revisados para garantir consistência, completude e confiabilidade nas interpretações.
 
 ## Hipóteses Informais para as Questões de Pesquisa
 
