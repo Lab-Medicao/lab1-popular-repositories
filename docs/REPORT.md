@@ -144,7 +144,7 @@ A seguir, são apresentadas as **questões de pesquisa (RQs)** e as respectivas 
 
   - **Hipótese Informal:** Espera-se que **sistemas populares possuam um alto percentual de _issues_ fechadas**, refletindo a eficiência da equipe de desenvolvimento em resolver problemas, responder às necessidades dos usuários e manter a qualidade do projeto. Um bom gerenciamento de _issues_ é um indicativo de maturidade do projeto.
 
-- **RQ 07. Sistemas escritos em linguagens mais populares (Python, JavaScript, TypeScript, Java, C#, C++, PHP, Shell, C, Go) recebem mais contribuição externa, lançam mais releases e são atualizados com mais frequência?**  
+- **RQ 07. Sistemas escritos em linguagens mais populares (Python, JavaScript, TypeScript, Java, C#, C++, PHP, Shell, C, Go) recebem mais contribuição externa, lançam mais releases e são atualizados com mais frequência?**
 
   - **Hipótese Informal:** Espera-se que **sistemas populares escritos em linguagens mais populares recebam mais contribuição externa, lançem mais releases e sejam atualizados com mais frequência**, refletindo a relevância para a comunidade e o engajamento dos usuários.
 
@@ -165,38 +165,6 @@ Considerando número de stars, os seguintes repositórios foram ranqueados como 
 | 9       | [996.ICU](https://github.com/996icu/996.ICU)                                          | 274197 | 0              | 0               | Unknown             |
 | 10      | [awesome-python](https://github.com/vinta/awesome-python)                             | 257287 | 0              | 0               | Python              |
 
-### RQ 01. Idade dos repositórios
-
-![Idade dos repositórios](charts/RQ01.idade_repositorios.png)
-
-### RQ 02. Pull Requests Aceitas vs Popularidade
-
-![Pull Requests Aceitas](charts/RQ02.pull_requests_aceitas.png)
-
-### RQ 03. Total de Releases vs Popularidade
-
-![Total de Releases](charts/RQ03.total_releases.png)
-
-### RQ 04. Tempo desde a última atualização
-
-![Tempo desde a última atualização](charts/RQ04.tempo_ultima_atualizacao.png)
-
-### RQ 05. Distribuição das linguagens primárias
-
-![Linguagem primária](charts/RQ05.linguagem_primaria.png)
-
-### RQ 06. Percentual de Issues Fechadas
-
-![Percentual de Issues Fechadas](charts/RQ06.percentual_issues_fechadas.png)
-
-### RQ 07. Contribuição Linguagens Populares vs Outras
-
-![Heatmap Linguagens Populares vs Outras](charts/RQ07.linguagens_populares.png)
-
-### Extra: Correlação entre métricas
-
-![Heatmap de Correlação](charts/extra_correlacoes.png)
-
 ## Análise dos Resultados
 
 A análise dos gráficos gerados permite discutir cada questão de pesquisa à luz das hipóteses informais propostas:
@@ -205,32 +173,49 @@ A análise dos gráficos gerados permite discutir cada questão de pesquisa à l
 
 A distribuição da idade dos repositórios mostra que a maioria dos sistemas populares têm 10 anos de existência em média, confirmando a hipótese de que maturidade contribui para popularidade. No entanto, há também repositórios relativamente novos com alto número de estrelas, indicando que inovação e relevância recente podem impulsionar popularidade rapidamente.
 
+![Idade dos repositórios](charts/RQ01.idade_repositorios.png)
+
 ### RQ 02. Sistemas populares recebem muita contribuição externa?
 
 O gráfico de dispersão entre estrelas e pull requests aceitas revela uma tendência positiva: repositórios mais populares tendem a receber mais contribuições externas. Isso confirma a hipótese de que uma comunidade ativa está associada à popularidade, embora existam exceções de projetos com muitas estrelas e poucas contribuições externas (possivelmente projetos mantidos por poucas pessoas ou com foco em documentação).
+
+![Pull Requests Aceitas](charts/RQ02.pull_requests_aceitas.png)
 
 ### RQ 03. Sistemas populares lançam releases com frequência?
 
 A relação entre número de estrelas e releases mostra que muitos projetos populares mantêm um ritmo constante de lançamentos, sustentando a hipótese de desenvolvimento ativo. Contudo, alguns projetos populares apresentam poucos releases, sugerindo que nem todo projeto popular segue ciclos formais de lançamento.
 
+![Total de Releases](charts/RQ03.total_releases.png)
+
 ### RQ 04. Sistemas populares são atualizados com frequência?
 
 A distribuição do tempo desde a última atualização indica que a maioria dos repositórios populares é atualizada frequentemente, corroborando a hipótese de que popularidade está ligada à manutenção ativa. Poucos projetos populares ficam longos períodos sem atualização.
+
+![Tempo desde a última atualização](charts/RQ04.tempo_ultima_atualizacao.png)
 
 ### RQ 05. Sistemas populares são escritos nas linguagens mais populares?
 
 O gráfico de distribuição das linguagens mostra forte predominância de linguagens como Python, JavaScript e TypeScript, alinhando-se à hipótese de que projetos populares tendem a ser escritos nas linguagens mais utilizadas pela comunidade.
 
+![Linguagem primária](charts/RQ05.linguagem_primaria.png)
+
 ### RQ 06. Sistemas populares possuem um alto percentual de issues fechadas?
 
 A distribuição do percentual de issues fechadas revela que a maioria dos projetos populares mantém uma taxa elevada de resolução de issues, indicando boa gestão e engajamento da equipe de desenvolvimento, conforme esperado.
 
+![Percentual de Issues Fechadas](charts/RQ06.percentual_issues_fechadas.png)
+
 ### RQ 07. Sistemas escritos em linguagens mais populares (Python, JavaScript, TypeScript, Java, C#, C++, PHP, Shell, C, Go) recebem mais contribuição externa, lançam mais releases e são atualizados com mais frequência?
+
 O gráfico comparando linguagens populares com outras mostra que, em média, projetos escritos nas linguagens mais populares recebem mais pull requests aceitas, lançam mais releases e são atualizados com maior frequência. Os boxplots reforçam que a dispersão dessas métricas é menor entre as linguagens populares, sugerindo maior consistência e engajamento da comunidade.
+
+![Heatmap Linguagens Populares vs Outras](charts/RQ07.linguagens_populares.png)
 
 ### Extra: Correlação entre métricas
 
 O heatmap mostra que as métricas analisadas são, em sua maioria, independentes, e que popularidade não garante, por si só, maior engajamento ou manutenção. Relações mais fortes aparecem entre engajamento externo (pull requests) e releases, e entre releases e resolução de issues.
+
+![Heatmap de Correlação](charts/extra_correlacoes.png)
 
 ## Conclusão
 
