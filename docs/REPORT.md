@@ -1,32 +1,34 @@
-# Relatório técnico: Características de Repositórios Populares
+# Relatório técnico: Características de Repositórios Populares do GitHub
 
 ## Objetivo
 
-Este projeto realiza a coleta automática de dados e métricas dos 100 repositórios públicos mais populares no GitHub, utilizando a **API GraphQL** do GitHub.  
-São obtidas informações como número de estrelas, linguagem principal, releases, issues abertas e fechadas, pull requests mesclados, data de criação e última atualização.
+Este projeto realiza a coleta automática de dados e métricas dos 1000 repositórios públicos mais populares no GitHub. São obtidas informações como número de estrelas, linguagem principal, releases, issues abertas e fechadas, pull requests mesclados, data de criação e última atualização.
 
 ## Linguagem de programação
 
 Python 3.11.0 foi a linguagem escolhida para desenvolver o experimento.
 
-## Requisitos do projeto
+## Dependências
 
-- Python 3.11.0 ou superior
-- Token de autenticação GitHub
-- Pacote Python: `requests`
+Para executar este experimento, as seguintes dependências foram utilizadas:
 
-## Funcionalidades
-
-- Consulta automática aos 100 repositórios mais populares do GitHub (ordenados por estrelas).
-- Utilização da API GraphQL para coletar informações detalhadas.
-- Requisições automáticas com tolerância a erros temporários (retries para status 502, 503 e 504).
-- Cálculo da razão de issues fechadas em relação ao total de issues.
+- `requests` (para fazer requisições HTTP à API do GitHub)
+- `keyring` (para armazenar credenciais de autenticação)
+- `pandas`, `seaborn`, `matplot` (para manipulação e visualização de dados)
 
 ## API Utilizada
 
 Foi utilizada a GitHub API para coletar os dados necessários dos repositórios. Mais detalhes sobre a API podem ser encontrados na documentação do GitHub REST API.
 
 - [GitHub REST API Documentation](https://docs.github.com/pt/rest?apiVersion=2022-11-28)
+
+## Funcionalidades
+
+- Consulta automática aos 1000 repositórios mais populares do GitHub (ordenados por estrelas).
+- Utilização da API GraphQL para coletar informações detalhadas.
+- Requisições automáticas com tolerância a erros temporários (retries para status 502, 503 e 504).
+- Cálculo da razão de issues fechadas em relação ao total de issues.
+- Criação de gráficos com uso de Searborn.
 
 ## Metodologia
 
@@ -78,6 +80,37 @@ Cada gráfico foi salvo em arquivo PNG para posterior análise e interpretação
 - O tempo total de execução foi registrado para avaliação de desempenho do processo de coleta e análise.
 - Todos os dados e gráficos foram revisados para garantir consistência, completude e confiabilidade nas interpretações.
 
+
+### Tempo Médio de Execução
+
+Devido à paginação dos resultados retornados pela API do GitHub, o script tem um tempo médio de execução de aproximadamente **12 minutos**.  
+Esse tempo pode variar conforme o número de repositórios processados e o limite de resultados por página.
+
+### Estrutura do Arquivo CSV
+
+O arquivo **repos_data.csv** gerado pelo script contém as seguintes colunas:
+
+- **name**: Nome do repositório.
+- **stars**: Número de estrelas recebidas.
+- **language**: Linguagem de programação principal utilizada.
+- **releases**: Número de releases publicadas.
+- **open_issues**: Número de issues abertas.
+- **closed_issues**: Número de issues fechadas.
+- **merged_prs**: Número de pull requests mesclados.
+- **created_at**: Data de criação do repositório.
+- **updated_at**: Data da última atualização do repositório.
+
+### Exemplo de Dados
+
+| name           | stars | language   | releases | open_issues | closed_issues | merged_prs | created_at          | updated_at          |
+| -------------- | ----- | ---------- | -------- | ----------- | ------------- | ---------- | ------------------- | ------------------- |
+| example-repo-1 | 1500  | Python     | 10       | 5           | 50            | 20         | 2020-01-01T12:00:00 | 2025-08-29T12:00:00 |
+| example-repo-2 | 1200  | JavaScript | 8        | 3           | 30            | 15         | 2019-05-15T12:00:00 | 2025-08-28T12:00:00 |
+
+---
+
+Esses dados podem ser utilizados para **análise estatística**, **visualização de tendências** e **comparação** entre repositórios populares no GitHub.
+
 ## Hipóteses Informais para as Questões de Pesquisa
 
 A seguir, são apresentadas as **questões de pesquisa (RQs)** e as respectivas **hipóteses informais** que orientarão a análise dos dados:
@@ -105,84 +138,63 @@ A seguir, são apresentadas as **questões de pesquisa (RQs)** e as respectivas 
 - **RQ 06. Sistemas populares possuem um alto percentual de _issues_ fechadas?**
   - **Hipótese Informal:** Espera-se que **sistemas populares possuam um alto percentual de _issues_ fechadas**, refletindo a eficiência da equipe de desenvolvimento em resolver problemas, responder às necessidades dos usuários e manter a qualidade do projeto. Um bom gerenciamento de _issues_ é um indicativo de maturidade do projeto.
 
----
+- **RQ 07. Sistemas escritos em linguagens mais populares recebem mais contribuição externa, lançam mais releases e são atualizados com mais frequência?**  
 
-## Metodologia PROFESSOR
+  - **Hipótese Informal:** Espera-se que **sistemas populares escritos em linguagens mais populares recebam mais contribuição externa, lançem mais releases e sejam atualizados com mais frequência**, refletindo a relevância para a comunidade e o engajamento dos usuários.
 
-- **Coleta de dados:** Foi utilizada a GitHub API para obter informações detalhadas dos repositórios que incluem a palavra-chave "microservices" em seus tópicos ou descrições. Como restrição do experimento, a coleta não inclui repositórios que implementam microsserviços, mas que não mencionam explicitamente a palavra-chave microservices em nenhum lugar.
-- **Filtragem e paginação:** A coleta de dados envolveu a utilização da paginação da API do GitHub devido ao grande número de informações nos repositórios mais relevantes. Esse processo pode levar em média 30 minutos para terminar devido à necessidade de lidar com múltiplas requisições e alto volume de dados.
-- **Normalização de dados:** Os dados foram normalizados usando a técnica de min-max scaling, garantindo que todos os valores estivessem na mesma escala para o cálculo da pontuação composta.
-- **Cálculo da pontuação composta:** Foi utilizado um método de combinação linear ponderada (scores) para calcular uma pontuação composta para cada repositório, levando em consideração tanto as estrelas quanto os forks.
-- **Ordenação dos Repositórios:** Os repositórios foram ordenados em ordem decrescente com base na pontuação composta calculada.
+## Resultados Obtidos
 
-## Busca de repositórios no GitHub com a palavra-chave "microservices"
+### RQ 01. Idade dos repositórios
+![Idade dos repositórios](charts/RQ01.idade_repositorios.png)
 
-Esta funcionalidade utiliza a API do GitHub para buscar repositórios que tenham relação com a palavra-chave `microservices`. A busca é feita de acordo com diferentes critérios, como nome do repositório, descrição, README, e tópicos associados. Abaixo estão os detalhes de como cada critério é utilizado:
+### RQ 02. Pull Requests Aceitas vs Popularidade
+![Pull Requests Aceitas](charts/RQ02.pull_requests_aceitas.png)
 
-### URL da API
+### RQ 03. Total de Releases vs Popularidade
+![Total de Releases](charts/RQ03.total_releases.png)
 
-A busca é realizada através do seguinte endpoint da API do GitHub:
+### RQ 04. Tempo desde a última atualização
+![Tempo desde a última atualização](charts/RQ04.tempo_ultima_atualizacao.png)
 
-https://api.github.com/search/repositories?q={keyword}&sort=stars&order=desc&per_page={num_repos}
+### RQ 05. Distribuição das linguagens primárias
+![Linguagem primária](charts/RQ05.linguagem_primaria.png)
 
-- **keyword**: palavra-chave usada na busca (neste caso, `"microservices"`).
-- **num_repos**: número de repositórios a serem retornados.
+### RQ 06. Percentual de Issues Fechadas
+![Percentual de Issues Fechadas](charts/RQ06.percentual_issues_fechadas.png)
 
-### Critérios de busca
+### RQ 07. Contribuição Linguagens Populares vs Outras
+![Heatmap Linguagens Populares vs Outras](charts/RQ07.linguagens_populares.png)
 
-1. **Nome do repositório**:
+### Extra: Correlação entre métricas
+![Heatmap de Correlação](charts/extra_correlacoes.png)
 
-   - Repositórios cujo nome contém a palavra-chave `microservices`.
+## Análise dos Resultados
+A análise dos gráficos gerados permite discutir cada questão de pesquisa à luz das hipóteses informais propostas:
 
-2. **Descrição do repositório**:
+### RQ 01. Sistemas populares são maduros/antigos?
+A distribuição da idade dos repositórios mostra que a maioria dos sistemas populares têm 10 anos de existência em média, confirmando a hipótese de que maturidade contribui para popularidade. No entanto, há também repositórios relativamente novos com alto número de estrelas, indicando que inovação e relevância recente podem impulsionar popularidade rapidamente.
 
-   - Repositórios cuja descrição menciona a palavra-chave `microservices`.
+### RQ 02. Sistemas populares recebem muita contribuição externa?
+O gráfico de dispersão entre estrelas e pull requests aceitas revela uma tendência positiva: repositórios mais populares tendem a receber mais contribuições externas. Isso confirma a hipótese de que uma comunidade ativa está associada à popularidade, embora existam exceções de projetos com muitas estrelas e poucas contribuições externas (possivelmente projetos mantidos por poucas pessoas ou com foco em documentação).
 
-3. **README**:
+### RQ 03. Sistemas populares lançam releases com frequência?
+A relação entre número de estrelas e releases mostra que muitos projetos populares mantêm um ritmo constante de lançamentos, sustentando a hipótese de desenvolvimento ativo. Contudo, alguns projetos populares apresentam poucos releases, sugerindo que nem todo projeto popular segue ciclos formais de lançamento.
 
-   - Repositórios cujo arquivo `README` contém a palavra-chave `microservices`.
+### RQ 05. Sistemas populares são escritos nas linguagens mais populares?
+O gráfico de distribuição das linguagens mostra forte predominância de linguagens como Python, JavaScript e TypeScript, alinhando-se à hipótese de que projetos populares tendem a ser escritos nas linguagens mais utilizadas pela comunidade.
 
-4. **Tópicos do repositório**:
-   - Repositórios que possuem tópicos (tags) associadas que contêm a palavra-chave `microservices`.
+### RQ 06. Sistemas populares possuem um alto percentual de issues fechadas?
+A distribuição do percentual de issues fechadas revela que a maioria dos projetos populares mantém uma taxa elevada de resolução de issues, indicando boa gestão e engajamento da equipe de desenvolvimento, conforme esperado.
 
-## Análise
+### RQ 07. Sistemas escritos em linguagens mais populares recebem mais contribuição externa, lançam mais releases e são atualizados com mais frequência?
+O gráfico comparando linguagens populares com outras mostra que, em média, projetos escritos nas linguagens mais populares recebem mais pull requests aceitas, lançam mais releases e são atualizados com maior frequência. Os boxplots reforçam que a dispersão dessas métricas é menor entre as linguagens populares, sugerindo maior consistência e engajamento da comunidade.
 
-## Resultados Encontrados
-
-### Tempo Médio de Execução
-
-Devido à paginação dos resultados retornados pela API do GitHub, o script tem um tempo médio de execução de aproximadamente **12 minutos**.  
-Esse tempo pode variar conforme o número de repositórios processados e o limite de resultados por página.
-
----
-
-### Estrutura do Arquivo CSV
-
-O arquivo **repos_data.csv** gerado pelo script contém as seguintes colunas:
-
-- **name**: Nome do repositório.
-- **stars**: Número de estrelas recebidas.
-- **language**: Linguagem de programação principal utilizada.
-- **releases**: Número de releases publicadas.
-- **open_issues**: Número de issues abertas.
-- **closed_issues**: Número de issues fechadas.
-- **merged_prs**: Número de pull requests mesclados.
-- **created_at**: Data de criação do repositório.
-- **updated_at**: Data da última atualização do repositório.
-
----
-
-### Exemplo de Dados
-
-| name           | stars | language   | releases | open_issues | closed_issues | merged_prs | created_at          | updated_at          |
-| -------------- | ----- | ---------- | -------- | ----------- | ------------- | ---------- | ------------------- | ------------------- |
-| example-repo-1 | 1500  | Python     | 10       | 5           | 50            | 20         | 2020-01-01T12:00:00 | 2025-08-29T12:00:00 |
-| example-repo-2 | 1200  | JavaScript | 8        | 3           | 30            | 15         | 2019-05-15T12:00:00 | 2025-08-28T12:00:00 |
-
----
-
-Esses dados podem ser utilizados para **análise estatística**, **visualização de tendências** e **comparação** entre repositórios populares no GitHub.
+### Extra: Correlação entre métricas
+O heatmap mostra que as métricas analisadas são, em sua maioria, independentes, e que popularidade não garante, por si só, maior engajamento ou manutenção. Relações mais fortes aparecem entre engajamento externo (pull requests) e releases, e entre releases e resolução de issues.
 
 ## Conclusão
 
-Este experimento demonstrou a viabilidade de coletar e analisar dados de repositórios populares no GitHub que implementam microsserviços. A metodologia utilizada permitiu identificar e ranquear os principais repositórios com base em critérios objetivos como estrelas e forks, apesar da limitação de apenas considerar repositórios que explicitamente mencionam "microservices" em seus metadados. O algoritmo de ranqueamento leva em média 30 minutos para rodar devido à necessidade de lidar com a paginação da API do GitHub, enquanto o algoritmo de cálculos estatísticos é instantâneo, pois os repositórios são fixos no código.
+Este experimento demonstrou a viabilidade de coletar e analisar dados de repositórios populares no GitHub. A metodologia utilizada permitiu identificar e ranquear os principais repositórios com base em critérios objetivos como quantidade de estrelas. O algoritmo de ranqueamento leva em média 12 minutos para rodar devido à necessidade de lidar com a paginação da API do GitHub, enquanto o algoritmo de criação de gráficos é quase instantâneo, permitindo uma análise rápida. 
+
+De modo geral, os resultados confirmam as hipóteses informais: projetos populares tendem a ser maduros, bem mantidos, escritos em linguagens populares e apresentam alto engajamento da comunidade. As poucas exceções observadas indicam que fatores como inovação, nicho de mercado ou foco do projeto também podem influenciar a popularidade e o perfil de manutenção.
+
