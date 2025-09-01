@@ -4,17 +4,21 @@
 
 Este projeto realiza a coleta automática de dados e métricas dos 1000 repositórios públicos mais populares no GitHub. São obtidas informações como número de estrelas, linguagem principal, releases, issues abertas e fechadas, pull requests mesclados, data de criação e última atualização.
 
-## Linguagem de programação
+## Linguagem de Programação
 
-Python 3.11.0 foi a linguagem escolhida para desenvolver o experimento.
+O experimento foi desenvolvido utilizando Python 3.11.0, escolhido pelo suporte a bibliotecas modernas e ampla compatibilidade com pacotes de análise de dados e requisições HTTP.
 
-## Dependências
+## Requisitos do Projeto
 
-Para executar este experimento, as seguintes dependências foram utilizadas:
-
-- `requests` (para fazer requisições HTTP à API do GitHub)
-- `keyring` (para armazenar credenciais de autenticação)
-- `pandas`, `seaborn`, `matplot` (para manipulação e visualização de dados)
+Para executar o experimento, são necessários:
+- Python 3.11.0 ou superior
+- Token de autenticação do GitHub
+- Pacotes Python:
+   - `requests`: para realizar requisições HTTP à API do GitHub
+   - `keyring`: para recuperar o token de autenticação armazenado de forma segura
+   - `pandas`: para manipulação e análise dos dados coletados
+   - `seaborn`: para visualização gráfica das métricas dos repositórios
+   - `matplotlib`: para suporte à renderização e salvamento dos gráficos
 
 ## API Utilizada
 
@@ -80,7 +84,6 @@ Cada gráfico foi salvo em arquivo PNG para posterior análise e interpretação
 - O tempo total de execução foi registrado para avaliação de desempenho do processo de coleta e análise.
 - Todos os dados e gráficos foram revisados para garantir consistência, completude e confiabilidade nas interpretações.
 
-
 ### Tempo Médio de Execução
 
 Devido à paginação dos resultados retornados pela API do GitHub, o script tem um tempo médio de execução de aproximadamente **12 minutos**.  
@@ -110,6 +113,13 @@ O arquivo **repos_data.csv** gerado pelo script contém as seguintes colunas:
 ---
 
 Esses dados podem ser utilizados para **análise estatística**, **visualização de tendências** e **comparação** entre repositórios populares no GitHub.
+
+### URL da API
+
+A busca foi realizada através do seguinte endpoint da API do GitHub:
+
+[ADD DE NOVO O ENDPOINT AQUI]
+
 
 ## Hipóteses Informais para as Questões de Pesquisa
 

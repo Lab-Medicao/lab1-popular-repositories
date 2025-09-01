@@ -9,7 +9,7 @@ São obtidas informações como número de estrelas, linguagem principal, releas
 - Lucas Henrique Chaves de Barros
 - Raquel Inez de Almeida Calazans
 
-### Professor orientador
+### Professor Orientador
 
 - João Paulo Carneiro Aramuni
 
@@ -25,12 +25,17 @@ São obtidas informações como número de estrelas, linguagem principal, releas
 
 - Python 3.11.0 ou superior
 - Token de autenticação GitHub
-- Pacote Python: `requests`
+- Pacote Python: `requests`, `keyring`, `tdqm`, `seaborn`, `pandas`, `matplotplib`
 
 ### Versões
 
 - Python==3.11.0
 - requests==2.32.3
+- keyring==25.6.0
+- tdqm==4.67.1
+- seaborn==0.13.2
+- pandas==2.2.3
+- matplotlib==3.9.2
 
 ## Preparação do ambiente
 
@@ -120,10 +125,12 @@ Usa paginação GraphQL para buscar até atingir `total_repos`.
 
 Busca informações detalhadas de um repositório específico, incluindo métricas de issues, releases, linguagem primária e pull requests.
 
-### `collect_and_print_repo_data()`
+### `collect_and_save_repo_data(filename="repos_data.csv")`
 
-Função principal que orquestra:
+Coleta informações detalhadas dos 1000 repositórios mais populares do GitHub e salva em um arquivo CSV.
 
-1. Obtenção da lista de repositórios mais populares.
-2. Consulta dos detalhes de cada repositório.
-3. Impressão dos dados no console.
+- Chama get_top_repo_ids para obter os 1000 repositórios mais populares.
+- Para cada repositório, chama get_repo_details para obter estrelas, datas, linguagem, releases, issues e pull requests.
+- Calcula a razão de issues fechadas como proporção de issues fechadas sobre o total.
+- Escreve todos os dados em um CSV com cabeçalho apropriado.
+- Exibe barra de progresso e mensagem de confirmação ao final.
