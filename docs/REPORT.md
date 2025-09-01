@@ -213,6 +213,10 @@ O gráfico de dispersão entre estrelas e pull requests aceitas revela uma tend�
 
 A relação entre número de estrelas e releases mostra que muitos projetos populares mantêm um ritmo constante de lançamentos, sustentando a hipótese de desenvolvimento ativo. Contudo, alguns projetos populares apresentam poucos releases, sugerindo que nem todo projeto popular segue ciclos formais de lançamento.
 
+### RQ 04. Sistemas populares são atualizados com frequência?
+
+A distribuição do tempo desde a última atualização indica que a maioria dos repositórios populares é atualizada frequentemente, corroborando a hipótese de que popularidade está ligada à manutenção ativa. Poucos projetos populares ficam longos períodos sem atualização.
+
 ### RQ 05. Sistemas populares são escritos nas linguagens mais populares?
 
 O gráfico de distribuição das linguagens mostra forte predominância de linguagens como Python, JavaScript e TypeScript, alinhando-se à hipótese de que projetos populares tendem a ser escritos nas linguagens mais utilizadas pela comunidade.
