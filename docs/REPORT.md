@@ -74,6 +74,7 @@ Para explorar os dados coletados e responder às questões de pesquisa (RQs), fo
 - Histograma (histplot): Distribuição de tempo desde a última atualização dos repositórios.
 - Scatter Plot: Relação entre estrelas e número de releases, e entre estrelas e pull requests aceitas.
 - Swarmplot: Distribuição das linguagens primárias dos repositórios populares.
+- Boxplot: Comparação entre linguagens populares (Python, JavaScript, TypeScript, Java, C#, C++, PHP, Shell, C, Go) e outras linguagens quanto à contribuição externa, lançamento de releases e frequência de atualizações.
 - Heatmap: Correlação entre todas as métricas coletadas para identificar padrões e relações.
 
 Cada gráfico foi salvo em arquivo PNG para posterior análise e interpretação dos resultados.
@@ -141,7 +142,7 @@ A seguir, são apresentadas as **questões de pesquisa (RQs)** e as respectivas 
 - **RQ 06. Sistemas populares possuem um alto percentual de _issues_ fechadas?**
   - **Hipótese Informal:** Espera-se que **sistemas populares possuam um alto percentual de _issues_ fechadas**, refletindo a eficiência da equipe de desenvolvimento em resolver problemas, responder às necessidades dos usuários e manter a qualidade do projeto. Um bom gerenciamento de _issues_ é um indicativo de maturidade do projeto.
 
-- **RQ 07. Sistemas escritos em linguagens mais populares recebem mais contribuição externa, lançam mais releases e são atualizados com mais frequência?**  
+- **RQ 07. Sistemas escritos em linguagens mais populares (Python, JavaScript, TypeScript, Java, C#, C++, PHP, Shell, C, Go) recebem mais contribuição externa, lançam mais releases e são atualizados com mais frequência?**  
 
   - **Hipótese Informal:** Espera-se que **sistemas populares escritos em linguagens mais populares recebam mais contribuição externa, lançem mais releases e sejam atualizados com mais frequência**, refletindo a relevância para a comunidade e o engajamento dos usuários.
 
@@ -189,7 +190,7 @@ O gráfico de distribuição das linguagens mostra forte predominância de lingu
 ### RQ 06. Sistemas populares possuem um alto percentual de issues fechadas?
 A distribuição do percentual de issues fechadas revela que a maioria dos projetos populares mantém uma taxa elevada de resolução de issues, indicando boa gestão e engajamento da equipe de desenvolvimento, conforme esperado.
 
-### RQ 07. Sistemas escritos em linguagens mais populares recebem mais contribuição externa, lançam mais releases e são atualizados com mais frequência?
+### RQ 07. Sistemas escritos em linguagens mais populares (Python, JavaScript, TypeScript, Java, C#, C++, PHP, Shell, C, Go) recebem mais contribuição externa, lançam mais releases e são atualizados com mais frequência?
 O gráfico comparando linguagens populares com outras mostra que, em média, projetos escritos nas linguagens mais populares recebem mais pull requests aceitas, lançam mais releases e são atualizados com maior frequência. Os boxplots reforçam que a dispersão dessas métricas é menor entre as linguagens populares, sugerindo maior consistência e engajamento da comunidade.
 
 ### Extra: Correlação entre métricas
@@ -200,4 +201,3 @@ O heatmap mostra que as métricas analisadas são, em sua maioria, independentes
 Este experimento demonstrou a viabilidade de coletar e analisar dados de repositórios populares no GitHub. A metodologia utilizada permitiu identificar e ranquear os principais repositórios com base em critérios objetivos como quantidade de estrelas. O algoritmo de ranqueamento leva em média 12 minutos para rodar devido à necessidade de lidar com a paginação da API do GitHub, enquanto o algoritmo de criação de gráficos é quase instantâneo, permitindo uma análise rápida. 
 
 De modo geral, os resultados confirmam as hipóteses informais: projetos populares tendem a ser maduros, bem mantidos, escritos em linguagens populares e apresentam alto engajamento da comunidade. As poucas exceções observadas indicam que fatores como inovação, nicho de mercado ou foco do projeto também podem influenciar a popularidade e o perfil de manutenção.
-
