@@ -25,12 +25,17 @@ São obtidas informações como número de estrelas, linguagem principal, releas
 
 - Python 3.11.0 ou superior
 - Token de autenticação GitHub
-- Pacote Python: `requests`
+- Pacote Python: `requests`, `keyring`, `tdqm`, `seaborn`, `pandas`, `matplotplib`
 
 ### Versões
 
 - Python==3.11.0
 - requests==2.32.3
+- keyring==25.6.0
+- tdqm==4.67.1
+- seaborn==0.13.2
+- pandas==2.2.3
+- matplotlib==3.9.2
 
 ## Preparação do ambiente
 

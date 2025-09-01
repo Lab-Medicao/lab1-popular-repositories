@@ -17,7 +17,9 @@ Para executar o experimento, são necessários:
 - Pacotes Python:
    - requests: para realizar requisições HTTP à API do GitHub
    - keyring: para recuperar o token de autenticação armazenado de forma segura
-   - tqdm: para exibir barras de progresso durante a coleta de dados
+   - pandas: para manipulação e análise dos dados coletados
+   - seaborn: para visualização gráfica das métricas dos repositórios
+   - matplotlib: para suporte à renderização e salvamento dos gráficos
 
 ## Funcionalidades
 
