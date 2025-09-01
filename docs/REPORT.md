@@ -114,13 +114,6 @@ O arquivo **repos_data.csv** gerado pelo script contém as seguintes colunas:
 
 Esses dados podem ser utilizados para **análise estatística**, **visualização de tendências** e **comparação** entre repositórios populares no GitHub.
 
-### URL da API
-
-A busca foi realizada através do seguinte endpoint da API do GitHub:
-
-[ADD DE NOVO O ENDPOINT AQUI]
-
-
 ## Hipóteses Informais para as Questões de Pesquisa
 
 A seguir, são apresentadas as **questões de pesquisa (RQs)** e as respectivas **hipóteses informais** que orientarão a análise dos dados:
