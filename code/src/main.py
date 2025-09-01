@@ -1,6 +1,5 @@
 import requests
 import time
-import keyring
 import os
 import csv
 from tqdm import tqdm
@@ -8,14 +7,11 @@ from tqdm import tqdm
 service_name = "GITHUB_API_TOKEN"
 username = "LAB_EXPERIMENTACAO"
 
-# Tenta obter o token do keyring
 TOKEN = keyring.get_password(service_name, username)
 
-# Se não achar no keyring, tenta na variável de ambiente
 if not TOKEN:
     print("Token não encontrado no keyring. Tentando ler da variável de ambiente 'GITHUB_API_TOKEN'...")
     TOKEN = os.getenv("GITHUB_API_TOKEN")
-
 if not TOKEN:
     raise ValueError("Tokenpython3 -m venv venv de autenticação não encontrado. Configure no keyring ou na variável de ambiente 'GITHUB_API_TOKEN'.")
 
@@ -50,7 +46,7 @@ def run_query(query, variables=None, retries=3):
 def get_top_repo_ids(total_repos=1000):
     repos = []
     cursor = None
-    per_page = 100  # GitHub GraphQL aceita até 100 por página
+    per_page = 100
 
     while len(repos) < total_repos:
         query = """
@@ -115,7 +111,6 @@ def collect_and_save_repo_data(filename="repos_data.csv"):
             "Closed Issues Ratio", "Merged Pull Requests"
         ])
 
-        # Adicionando barra de progresso
         for repo in tqdm(repos, desc="Processando repositórios", unit="repo"):
             details = get_repo_details(repo["owner"]["login"], repo["name"])
             primary_language = details['primaryLanguage']['name'] if details['primaryLanguage'] else 'Unknown'
