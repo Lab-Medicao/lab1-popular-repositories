@@ -11,14 +11,15 @@ O experimento foi desenvolvido utilizando Python 3.11.0, escolhido pelo suporte 
 ## Requisitos do Projeto
 
 Para executar o experimento, são necessários:
+
 - Python 3.11.0 ou superior
 - Token de autenticação do GitHub
 - Pacotes Python:
-   - `requests`: para realizar requisições HTTP à API do GitHub
-   - `keyring`: para recuperar o token de autenticação armazenado de forma segura
-   - `pandas`: para manipulação e análise dos dados coletados
-   - `seaborn`: para visualização gráfica das métricas dos repositórios
-   - `matplotlib`: para suporte à renderização e salvamento dos gráficos
+  - `requests`: para realizar requisições HTTP à API do GitHub
+  - `keyring`: para recuperar o token de autenticação armazenado de forma segura
+  - `pandas`: para manipulação e análise dos dados coletados
+  - `seaborn`: para visualização gráfica das métricas dos repositórios
+  - `matplotlib`: para suporte à renderização e salvamento dos gráficos
 
 ## API Utilizada
 
@@ -41,7 +42,7 @@ Foi utilizada a GitHub API para coletar os dados necessários dos repositórios.
 - Coletar dados dos 1000 repositórios públicos mais populares, ordenados pelo número de estrelas.
 - O critério de popularidade foi definido pela contagem de estrelas (stargazerCount).
 
-### 2. Coleta de dados: 
+### 2. Coleta de dados:
 
 A coleta de dados foi realizada utilizando a API do GitHub para obter informações detalhadas dos 1000 repositórios públicos mais populares, ordenados pelo número de estrelas. Como critério do experimento, foram considerados apenas os repositórios públicos com pelo menos uma estrela. Repositórios privados ou com menos relevância em termos de popularidade não foram incluídos na análise.
 
@@ -139,65 +140,96 @@ A seguir, são apresentadas as **questões de pesquisa (RQs)** e as respectivas 
   - **Hipótese Informal:** Espera-se que **sistemas populares sejam majoritariamente escritos nas linguagens de programação mais populares**, o que facilita a contribuição de uma base maior de desenvolvedores e a adoção por um público mais amplo, dado que essas linguagens possuem mais ferramentas, documentação e suporte.
 
 - **RQ 06. Sistemas populares possuem um alto percentual de _issues_ fechadas?**
+
   - **Hipótese Informal:** Espera-se que **sistemas populares possuam um alto percentual de _issues_ fechadas**, refletindo a eficiência da equipe de desenvolvimento em resolver problemas, responder às necessidades dos usuários e manter a qualidade do projeto. Um bom gerenciamento de _issues_ é um indicativo de maturidade do projeto.
 
-- **RQ 07. Sistemas escritos em linguagens mais populares recebem mais contribuição externa, lançam mais releases e são atualizados com mais frequência?**  
+- **RQ 07. Sistemas escritos em linguagens mais populares recebem mais contribuição externa, lançam mais releases e são atualizados com mais frequência?**
 
   - **Hipótese Informal:** Espera-se que **sistemas populares escritos em linguagens mais populares recebam mais contribuição externa, lançem mais releases e sejam atualizados com mais frequência**, refletindo a relevância para a comunidade e o engajamento dos usuários.
 
 ## Resultados Obtidos
 
+Considerando número de stars, os seguintes repositórios foram ranqueados como os mais populares:
+
+| Ranking | Repositório                                                                           | Stars  | Issues Abertas | Issues Fechadas | Linguagem Principal |
+| ------- | ------------------------------------------------------------------------------------- | ------ | -------------- | --------------- | ------------------- |
+| 1       | [freeCodeCamp](https://github.com/freeCodeCamp/freeCodeCamp)                          | 426781 | 191            | 19655           | TypeScript          |
+| 2       | [build-your-own-x](https://github.com/codecrafters-io/build-your-own-x)               | 415049 | 231            | 595             | Markdown            |
+| 3       | [awesome](https://github.com/sindresorhus/awesome)                                    | 395836 | 14             | 340             | Unknown             |
+| 4       | [free-programming-books](https://github.com/EbookFoundation/free-programming-books)   | 366700 | 30             | 1152            | Python              |
+| 5       | [public-apis](https://github.com/public-apis/public-apis)                             | 363296 | 13             | 704             | Python              |
+| 6       | [developer-roadmap](https://github.com/kamranahmedse/developer-roadmap)               | 334911 | 251            | 2693            | TypeScript          |
+| 7       | [coding-interview-university](https://github.com/jwasham/coding-interview-university) | 325391 | 63             | 453             | Unknown             |
+| 8       | [system-design-primer](https://github.com/donnemartin/system-design-primer)           | 317963 | 250            | 91              | Python              |
+| 9       | [996.ICU](https://github.com/996icu/996.ICU)                                          | 274197 | 0              | 0               | Unknown             |
+| 10      | [awesome-python](https://github.com/vinta/awesome-python)                             | 257287 | 0              | 0               | Python              |
+
 ### RQ 01. Idade dos repositórios
+
 ![Idade dos repositórios](charts/RQ01.idade_repositorios.png)
 
 ### RQ 02. Pull Requests Aceitas vs Popularidade
+
 ![Pull Requests Aceitas](charts/RQ02.pull_requests_aceitas.png)
 
 ### RQ 03. Total de Releases vs Popularidade
+
 ![Total de Releases](charts/RQ03.total_releases.png)
 
 ### RQ 04. Tempo desde a última atualização
+
 ![Tempo desde a última atualização](charts/RQ04.tempo_ultima_atualizacao.png)
 
 ### RQ 05. Distribuição das linguagens primárias
+
 ![Linguagem primária](charts/RQ05.linguagem_primaria.png)
 
 ### RQ 06. Percentual de Issues Fechadas
+
 ![Percentual de Issues Fechadas](charts/RQ06.percentual_issues_fechadas.png)
 
 ### RQ 07. Contribuição Linguagens Populares vs Outras
+
 ![Heatmap Linguagens Populares vs Outras](charts/RQ07.linguagens_populares.png)
 
 ### Extra: Correlação entre métricas
+
 ![Heatmap de Correlação](charts/extra_correlacoes.png)
 
 ## Análise dos Resultados
+
 A análise dos gráficos gerados permite discutir cada questão de pesquisa à luz das hipóteses informais propostas:
 
 ### RQ 01. Sistemas populares são maduros/antigos?
+
 A distribuição da idade dos repositórios mostra que a maioria dos sistemas populares têm 10 anos de existência em média, confirmando a hipótese de que maturidade contribui para popularidade. No entanto, há também repositórios relativamente novos com alto número de estrelas, indicando que inovação e relevância recente podem impulsionar popularidade rapidamente.
 
 ### RQ 02. Sistemas populares recebem muita contribuição externa?
+
 O gráfico de dispersão entre estrelas e pull requests aceitas revela uma tendência positiva: repositórios mais populares tendem a receber mais contribuições externas. Isso confirma a hipótese de que uma comunidade ativa está associada à popularidade, embora existam exceções de projetos com muitas estrelas e poucas contribuições externas (possivelmente projetos mantidos por poucas pessoas ou com foco em documentação).
 
 ### RQ 03. Sistemas populares lançam releases com frequência?
+
 A relação entre número de estrelas e releases mostra que muitos projetos populares mantêm um ritmo constante de lançamentos, sustentando a hipótese de desenvolvimento ativo. Contudo, alguns projetos populares apresentam poucos releases, sugerindo que nem todo projeto popular segue ciclos formais de lançamento.
 
 ### RQ 05. Sistemas populares são escritos nas linguagens mais populares?
+
 O gráfico de distribuição das linguagens mostra forte predominância de linguagens como Python, JavaScript e TypeScript, alinhando-se à hipótese de que projetos populares tendem a ser escritos nas linguagens mais utilizadas pela comunidade.
 
 ### RQ 06. Sistemas populares possuem um alto percentual de issues fechadas?
+
 A distribuição do percentual de issues fechadas revela que a maioria dos projetos populares mantém uma taxa elevada de resolução de issues, indicando boa gestão e engajamento da equipe de desenvolvimento, conforme esperado.
 
 ### RQ 07. Sistemas escritos em linguagens mais populares recebem mais contribuição externa, lançam mais releases e são atualizados com mais frequência?
+
 O gráfico comparando linguagens populares com outras mostra que, em média, projetos escritos nas linguagens mais populares recebem mais pull requests aceitas, lançam mais releases e são atualizados com maior frequência. Os boxplots reforçam que a dispersão dessas métricas é menor entre as linguagens populares, sugerindo maior consistência e engajamento da comunidade.
 
 ### Extra: Correlação entre métricas
+
 O heatmap mostra que as métricas analisadas são, em sua maioria, independentes, e que popularidade não garante, por si só, maior engajamento ou manutenção. Relações mais fortes aparecem entre engajamento externo (pull requests) e releases, e entre releases e resolução de issues.
 
 ## Conclusão
 
-Este experimento demonstrou a viabilidade de coletar e analisar dados de repositórios populares no GitHub. A metodologia utilizada permitiu identificar e ranquear os principais repositórios com base em critérios objetivos como quantidade de estrelas. O algoritmo de ranqueamento leva em média 12 minutos para rodar devido à necessidade de lidar com a paginação da API do GitHub, enquanto o algoritmo de criação de gráficos é quase instantâneo, permitindo uma análise rápida. 
+Este experimento demonstrou a viabilidade de coletar e analisar dados de repositórios populares no GitHub. A metodologia utilizada permitiu identificar e ranquear os principais repositórios com base em critérios objetivos como quantidade de estrelas. O algoritmo de ranqueamento leva em média 12 minutos para rodar devido à necessidade de lidar com a paginação da API do GitHub, enquanto o algoritmo de criação de gráficos é quase instantâneo, permitindo uma análise rápida.
 
 De modo geral, os resultados confirmam as hipóteses informais: projetos populares tendem a ser maduros, bem mantidos, escritos em linguagens populares e apresentam alto engajamento da comunidade. As poucas exceções observadas indicam que fatores como inovação, nicho de mercado ou foco do projeto também podem influenciar a popularidade e o perfil de manutenção.
-
