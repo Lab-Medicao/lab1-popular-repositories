@@ -148,7 +148,7 @@ A seguir, são apresentadas as **questões de pesquisa (RQs)** e as respectivas 
 
   - **Hipótese Informal:** Espera-se que **sistemas populares escritos em linguagens mais populares recebam mais contribuição externa, lançem mais releases e sejam atualizados com mais frequência**, refletindo a relevância para a comunidade e o engajamento dos usuários.
 
-## Resultados Obtidos
+## Resultados Brutos Obtidos
 
 Considerando número de stars, os seguintes repositórios foram ranqueados como os mais populares:
 
@@ -165,7 +165,39 @@ Considerando número de stars, os seguintes repositórios foram ranqueados como 
 | 9       | [996.ICU](https://github.com/996icu/996.ICU)                                          | 274197 | 0              | 0               | Unknown             |
 | 10      | [awesome-python](https://github.com/vinta/awesome-python)                             | 257287 | 0              | 0               | Python              |
 
-## Análise dos Resultados
+No top 10, podemos perceber que os repositórios têm em comum o foco em educação, aprendizado e recursos comunitários, mostrando que conteúdos acessíveis e colaborativos atraem grande interesse.
+
+### Distribuição por Linguagem
+
+As linguagens mais frequentes entre os repositórios populares:
+* Python – 189 repositórios
+* TypeScript – 156
+* JavaScript – 130
+* Go – 73
+* Java – 50
+* C++ – 48
+* Rust – 44
+
+Python, TypeScript e JavaScript dominam, reforçando a popularidade em áreas como ciência de dados, web e aplicações modernas.
+
+### Gestão de Issues
+
+Em média, cada repositório possui 624 issues abertas.
+
+A taxa média de fechamento de issues é de 76%, o que indica que projetos populares têm uma comunidade ativa em resolução de problemas.
+
+### Maturidade dos Repositórios
+
+A maior parte dos repositórios populares surgiu a partir de 2013 em diante, coincidindo com o crescimento da cultura open source e do GitHub como principal plataforma de colaboração.
+
+### Insights Principais
+
+* Projetos educacionais, coleções de recursos e APIs abertas são os que mais atraem estrelas.
+* Python, TypeScript e JavaScript concentram boa parte dos projetos de destaque.
+* A saúde do projeto é perceptível pela alta proporção de issues resolvidas.
+* A popularidade não depende apenas da idade do repositório, mas também da relevância do tema e engajamento da comunidade.
+
+## Análise dos Resultados 
 
 A análise dos gráficos gerados permite discutir cada questão de pesquisa à luz das hipóteses informais propostas:
 
