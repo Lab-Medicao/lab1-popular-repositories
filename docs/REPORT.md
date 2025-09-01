@@ -5,15 +5,19 @@
 Este projeto realiza a coleta automática de dados e métricas dos 100 repositórios públicos mais populares no GitHub, utilizando a **API GraphQL** do GitHub.  
 São obtidas informações como número de estrelas, linguagem principal, releases, issues abertas e fechadas, pull requests mesclados, data de criação e última atualização.
 
-## Linguagem de programação
+## Linguagem de Programação
 
-Python 3.11.0 foi a linguagem escolhida para desenvolver o experimento.
+O experimento foi desenvolvido utilizando Python 3.11.0, escolhido pelo suporte a bibliotecas modernas e ampla compatibilidade com pacotes de análise de dados e requisições HTTP.
 
-## Requisitos do projeto
+## Requisitos do Projeto
 
+Para executar o experimento, são necessários:
 - Python 3.11.0 ou superior
-- Token de autenticação GitHub
-- Pacote Python: `requests`
+- Token de autenticação do GitHub
+- Pacotes Python:
+   - requests: para realizar requisições HTTP à API do GitHub
+   - keyring: para recuperar o token de autenticação armazenado de forma segura
+   - tqdm: para exibir barras de progresso durante a coleta de dados
 
 ## Funcionalidades
 
@@ -77,6 +81,12 @@ Cada gráfico foi salvo em arquivo PNG para posterior análise e interpretação
 - O script foi implementado em Python e os dados coletados foram salvos em um arquivo CSV (repos_data.csv) para posterior análise.
 - O tempo total de execução foi registrado para avaliação de desempenho do processo de coleta e análise.
 - Todos os dados e gráficos foram revisados para garantir consistência, completude e confiabilidade nas interpretações.
+
+## URL da API
+
+A busca foi realizada através do seguinte endpoint da API do GitHub:
+
+
 
 ## Hipóteses Informais para as Questões de Pesquisa
 
