@@ -23,7 +23,7 @@ def grafico_idade_repos(df):
     sns.violinplot(y=df['Idade (anos)'])
     plt.title('Distribuição da idade dos repositórios populares (anos)')
     plt.ylabel('Idade (anos)')
-    salvar_grafico('idade_repositorios')
+    salvar_grafico('RQ01.idade_repositorios')
 
 # RQ 02: Sistemas populares recebem muita contribuição externa?
 # Métrica: Total de pull requests aceitas 
@@ -34,7 +34,7 @@ def grafico_pull_requests(df):
     plt.xlabel('Estrelas (Popularidade)')
     plt.ylabel('Pull Requests Aceitas (Contribuição Externa)')
     plt.title('Popularidade vs Contribuição Externa nos Repositórios')
-    salvar_grafico('pull_requests_aceitas')
+    salvar_grafico('RQ02.pull_requests_aceitas')
 
 # RQ 03: Sistemas populares lançam releases com frequência?
 # Métrica: Total de releases 
@@ -45,7 +45,7 @@ def grafico_releases(df):
     plt.xlabel('Estrelas (Popularidade)')
     plt.ylabel('Total de Releases')
     plt.title('Releases vs Popularidade')
-    salvar_grafico('total_releases')
+    salvar_grafico('RQ03.total_releases')
 
 # RQ 04: Sistemas populares são atualizados com frequência?
 # Métrica: Tempo até a última atualização 
@@ -59,7 +59,7 @@ def grafico_tempo_ultima_atualizacao(df):
     plt.title('Distribuição do tempo desde a última atualização dos repositórios (dias)')
     plt.xlabel('Dias desde última atualização')
     plt.ylabel('Quantidade de repositórios')
-    salvar_grafico('tempo_ultima_atualizacao')
+    salvar_grafico('RQ04.tempo_ultima_atualizacao')
 
 # RQ 05: Sistemas populares são escritos nas linguagens mais populares?
 # Métrica: Linguagem primária dos repositórios populares 
@@ -69,7 +69,7 @@ def grafico_linguagem_primaria(df):
     sns.swarmplot(y='Primary Language', data=df, size=3)
     plt.title('Distribuição das linguagens primárias dos repositórios populares')
     plt.ylabel('Linguagem')
-    salvar_grafico('linguagem_primaria')
+    salvar_grafico('RQ05.linguagem_primaria')
 
 # RQ 06: Sistemas populares possuem um alto percentual de issues fechadas?
 # Métrica: Percentual de issues fechadas 
@@ -79,7 +79,7 @@ def grafico_percentual_issues_fechadas(df):
     sns.violinplot(y=df['Closed Issues Ratio'])
     plt.title('Distribuição do percentual de issues fechadas')
     plt.ylabel('Razão de Issues Fechadas')
-    salvar_grafico('percentual_issues_fechadas')
+    salvar_grafico('RQ06.percentual_issues_fechadas')
 
 # RQ 07 - Extra: Sistemas escritos em linguagens mais populares recebem mais 
 # contribuição externa, lançam mais releases e são atualizados com mais frequência?
@@ -87,7 +87,7 @@ def grafico_percentual_issues_fechadas(df):
 # reportagem fornecida (imagem "GitHub-Octoverse-2024-top-programming-languages) 
 # com os resultados de sistemas em outras linguagens.
 # Métricas: Total de pull requests aceitas, total de releases, tempo até a última atualização
-# Gráfico: Heatmap
+# Gráfico: Boxplot
 def grafico_extra_linguagens_populares(df):
     linguagens_populares = [
         "Python", "JavaScript", "TypeScript", "Java", "C#", "C++", "PHP", "Shell", "C", "Go"
@@ -98,7 +98,7 @@ def grafico_extra_linguagens_populares(df):
     plt.figure(figsize=(10,6))
     sns.boxplot(x='Grupo Linguagem', y='Merged Pull Requests', data=df)
     plt.title('Pull Requests Aceitas: Linguagens populares vs Outras')
-    salvar_grafico('extra_linguagens_populares')
+    salvar_grafico('RQ07.linguagens_populares')
 
 # Gráfico adicional: Heatmap de correlações entre métricas
 def grafico_extra_heatmap_correlacoes(df):
