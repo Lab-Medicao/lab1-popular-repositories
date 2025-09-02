@@ -54,7 +54,7 @@ A coleta de dados foi realizada utilizando a API do GitHub para obter informaç�
 - Ordenação dos resultados: A query de busca retorna os repositórios em ordem decrescente de estrelas, salvando no CSV sem aplicar nenhuma ordenação adicional, sendo essa determinada pela própria API do GitHub.
 - Tolerância a falhas: Foi implementado um mecanismo básico de tolerância a falhas, onde são disparadas requisições automáticas com tolerância a erros temporários (mas limitado a erros temporários da API), incluindo retries para os status 502, 503 e 504.
 
-3. Métricas Coletadas
+### 4. Métricas Coletadas
 
 Para cada repositório, foram obtidas as seguintes métricas:
 
@@ -67,7 +67,7 @@ Para cada repositório, foram obtidas as seguintes métricas:
 - Razão de issues fechadas sobre o total
 - Número de pull requests mesclados
 
-4. Análise Gráfica
+### 5. Análise Gráfica
 
 Para explorar os dados coletados e responder às questões de pesquisa (RQs), foram criados gráficos utilizando Python com a biblioteca Seaborn, incluindo:
 
@@ -80,13 +80,13 @@ Para explorar os dados coletados e responder às questões de pesquisa (RQs), fo
 
 Cada gráfico foi salvo em arquivo PNG para posterior análise e interpretação dos resultados.
 
-5. Execução e Validação
+### 6. Execução e Validação
 
 - O script foi implementado em Python e os dados coletados foram salvos em um arquivo CSV (repos_data.csv) para posterior análise.
 - O tempo total de execução foi registrado para avaliação de desempenho do processo de coleta e análise.
 - Todos os dados e gráficos foram revisados para garantir consistência, completude e confiabilidade nas interpretações.
 
-### Tempo Médio de Execução
+#### Tempo Médio de Execução
 
 Devido à paginação dos resultados retornados pela API do GitHub, o script tem um tempo médio de execução de aproximadamente **12 minutos**.  
 Esse tempo pode variar conforme o número de repositórios processados e o limite de resultados por página.
