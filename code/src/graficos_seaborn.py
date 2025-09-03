@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 import os
 
 def salvar_grafico(nome_arquivo):
-    pasta = 'graficos'
+    pasta = './docs/charts'
     os.makedirs(pasta, exist_ok=True)
     caminho = os.path.join(pasta, f'{nome_arquivo}.png')
     plt.savefig(caminho, bbox_inches='tight')
@@ -27,7 +27,7 @@ def grafico_idade_repos(df):
 
 # RQ 02: Sistemas populares recebem muita contribuição externa?
 # Métrica: Total de pull requests aceitas 
-# Gráfico: Histograma (histplot)
+# Gráfico: Dispersão (scatter plot)
 def grafico_pull_requests(df):
     plt.figure(figsize=(10,6))
     plt.scatter(df['Stars'], df['Merged Pull Requests'])
@@ -120,7 +120,7 @@ def grafico_extra_heatmap_correlacoes(df):
     salvar_grafico('extra_correlacoes')
 
 def main():
-    df = pd.read_csv('repos_data.csv')
+    df = pd.read_csv('./code/src/repos_data.csv')
 
     grafico_idade_repos(df)
     grafico_pull_requests(df)
