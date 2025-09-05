@@ -139,5 +139,5 @@ def collect_and_save_repo_data(filename="repos_data.csv"):
 
 if __name__ == "__main__":
     start_time = time.time()
-    collect_and_save_repo_data("repos_data.csv")
+    collect_and_save_repo_data("./code/src/repos_data.csv")
     print(f"⏱️ Tempo total de execução: {time.time() - start_time:.2f} segundos")

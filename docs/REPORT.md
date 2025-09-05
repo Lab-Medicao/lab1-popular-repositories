@@ -239,7 +239,7 @@ A distribuição do percentual de issues fechadas revela que a maioria dos proje
 
 ### RQ 07. Sistemas escritos em linguagens mais populares (Python, JavaScript, TypeScript, Java, C#, C++, PHP, Shell, C, Go) recebem mais contribuição externa, lançam mais releases e são atualizados com mais frequência?
 
-O gráfico comparando linguagens populares com outras mostra que, em média, projetos escritos nas linguagens mais populares recebem mais pull requests aceitas, lançam mais releases e são atualizados com maior frequência. Os boxplots reforçam que a dispersão dessas métricas é menor entre as linguagens populares, sugerindo maior consistência e engajamento da comunidade.
+Os gráficos mostram que, embora a maioria dos projetos (tanto populares quanto de outras linguagens) siga padrões parecidos, os projetos que usam linguagens populares se destacam por terem o potencial de atrair um número muito maior de contribuições (pull requests) e de ter um número muito maior de lançamentos (releases). No entanto, o nível de manutenção ativa (tempo desde a última atualização) é similar para ambos os grupos.
 
 ![Heatmap Linguagens Populares vs Outras](charts/RQ07.linguagens_populares.png)
 

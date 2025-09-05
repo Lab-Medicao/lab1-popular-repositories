@@ -95,9 +95,22 @@ def grafico_extra_linguagens_populares(df):
     df['Grupo Linguagem'] = df['Primary Language'].apply(
         lambda x: 'Popular' if x in linguagens_populares else 'Outras'
     )
-    plt.figure(figsize=(10,6))
-    sns.boxplot(x='Grupo Linguagem', y='Merged Pull Requests', data=df)
-    plt.title('Pull Requests Aceitas: Linguagens populares vs Outras')
+    df['Last Updated'] = pd.to_datetime(df['Last Updated'], utc=True)
+    now = datetime.now(timezone.utc)
+    df['Dias desde última atualização'] = (now - df['Last Updated']).dt.days
+
+    fig, axes = plt.subplots(1, 3, figsize=(18,6))
+
+    sns.boxplot(x='Grupo Linguagem', y='Merged Pull Requests', data=df, ax=axes[0])
+    axes[0].set_title('Pull Requests Aceitas')
+
+    sns.boxplot(x='Grupo Linguagem', y='Releases', data=df, ax=axes[1])
+    axes[1].set_title('Total de Releases')
+
+    sns.boxplot(x='Grupo Linguagem', y='Dias desde última atualização', data=df, ax=axes[2])
+    axes[2].set_title('Dias desde última atualização')
+
+    fig.suptitle('Comparação: Linguagens populares vs Outras')
     salvar_grafico('RQ07.linguagens_populares')
 
 # Gráfico adicional: Heatmap de correlações entre métricas
